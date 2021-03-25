@@ -1,0 +1,37 @@
+{
+  "name": "@news/entities",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc && npm pack",
+    "release": "standard-version",
+    "release:minor": "standard-version --release-as minor",
+    "release:patch": "standard-version --release-as patch",
+    "release:major": "standard-version --release-as major"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@commitlint/cli": "^11.0.0",
+    "@commitlint/config-angular": "^11.0.0",
+    "@commitlint/config-conventional": "^11.0.0",
+    "@types/mongoose": "~5.7.14",
+    "@types/nanoid": "^2.1.0",
+    "husky": "^5.0.9",
+    "inversify": "^5.0.1",
+    "reflect-metadata": "^0.1.13",
+    "standard-version": "^9.1.0",
+    "typescript": "^3.8.3"
+  },
+  "files": [
+    "dist/**/*"
+  ],
+  "dependencies": {
+    "cuid": "^2.1.8",
+    "mongoose": "~5.9.10",
+    "nanoid": "^3.1.20"
+  }
+}

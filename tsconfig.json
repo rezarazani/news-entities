@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+      "target": "es2015",
+      "outDir": "./dist",
+      "rootDir": "./src",
+      "module": "commonjs",
+      "lib": ["es6"],
+      "types": ["reflect-metadata"],
+      "baseUrl": "./src",
+      "declaration": true,
+      "noEmitOnError": true,
+      "noImplicitAny": true,
+      "noImplicitReturns": true,
+      // "noUnusedParameters": true,
+      "strictNullChecks": true,
+      "strictPropertyInitialization": true,
+      "experimentalDecorators": true,
+      "emitDecoratorMetadata": true,
+      "allowJs": false
+  },
+  "exclude": [
+    "./node_modules/**/*",
+    "./dist/**/*"
+  ]
+}
