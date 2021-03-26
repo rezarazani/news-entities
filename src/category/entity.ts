@@ -7,7 +7,8 @@ export type Category = {
     id: string,
     name : string ,
     description : string ,
-    visible : boolean
+    visible : boolean ,
+    pic : string 
 }
 
 @injectable()
@@ -17,6 +18,8 @@ export class CategoryEntity {
     private _name: string = '';
     private _description: string = '';
     private _visible: boolean = false ;
+    private _pic: string = '';
+
 
     constructor(
         @inject(ENTITY.Id) private Id: Id,
@@ -35,6 +38,10 @@ export class CategoryEntity {
 
         if (params.visible) {
             this.visible = params.visible;
+        }
+
+        if (params.pic) {
+            this.pic = params.pic;
         }
     }
 
@@ -69,12 +76,20 @@ export class CategoryEntity {
         this._visible = visible;
     }
 
+    get pic(): string {
+        return this._pic;
+    }
+    set pic(pic: string) {
+        this._pic = pic;
+    }
+
     public toObject() : Category {
         return {
             id : this.id ,
             name : this.name ,
             description :  this.description ,
-            visible : this.visible
+            visible : this.visible ,
+            pic : this.pic
         }
     }
 
