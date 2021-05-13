@@ -3,13 +3,14 @@ import { ENTITY } from "../ioc/types";
 import { HashHelper } from "../interfaces/hash";
 import { Id } from "../interfaces/id";
 
-type AccountTypes = 'admin' 
+type AccountTypes = 'admin' | 'normal'
 
 export type User = {
     id: string,
     accountType: AccountTypes,
     username: string,
     password: string,
+    email : string ,
     salt: string,
     name: string,
     isBlock : boolean ;
@@ -23,6 +24,7 @@ export class UserEntity {
     private _name: string;
     private _username: string;
     private _password: string;
+    private _email: string;
     private _isBlock: boolean;
     private _salt: string;
     private _accountType: AccountTypes;
@@ -36,8 +38,9 @@ export class UserEntity {
         this._name = '';
         this._username = '';
         this._password = '';
+        this._email = '';
         this._salt = this.hash.randomString();
-        this._accountType = 'admin';
+        this._accountType = 'normal';
         this._refreshToken = [];
         this._isBlock = false ;
     }
@@ -54,6 +57,9 @@ export class UserEntity {
         }
         if (params.password) {
             this.password = params.password;
+        }
+        if (params.email) {
+            this.email = params.email;
         }
         if (params.salt) {
             this.salt = params.salt;
@@ -91,6 +97,13 @@ export class UserEntity {
     }
     set username(username: string) {
         this._username = username;
+    }
+
+    get email(): string {
+        return this._email;
+    }
+    set email(email: string) {
+        this._email = email;
     }
 
     get accountType(): AccountTypes {
