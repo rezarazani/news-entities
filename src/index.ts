@@ -53,3 +53,15 @@ export {
     News ,
     NewsEntity
 } from './news';
+
+
+export {
+    BookMark ,
+    BookMarkEntity
+} from './bookmark';
+
+export {
+    Comment ,
+    CommentEntity
+} from './comment';
+

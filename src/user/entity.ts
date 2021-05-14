@@ -3,7 +3,9 @@ import { ENTITY } from "../ioc/types";
 import { HashHelper } from "../interfaces/hash";
 import { Id } from "../interfaces/id";
 
-type AccountTypes = 'admin' | 'normal'
+type AccountTypes = 'admin' | 'normal';
+
+const maxTag = 20;
 
 export type User = {
     id: string,
@@ -14,7 +16,8 @@ export type User = {
     salt: string,
     name: string,
     isBlock : boolean ;
-    refreshToken: string[]
+    refreshToken: string[],
+    tagsUserSee : string[]
 }
 
 @injectable()
@@ -29,6 +32,8 @@ export class UserEntity {
     private _salt: string;
     private _accountType: AccountTypes;
     private _refreshToken: User['refreshToken'];
+    private _tagsUserSee: string[];
+
 
     constructor(
         @inject(ENTITY.Hash) private hash: HashHelper,
@@ -43,6 +48,7 @@ export class UserEntity {
         this._accountType = 'normal';
         this._refreshToken = [];
         this._isBlock = false ;
+        this._tagsUserSee = [] ;
     }
 
     public set(params: Partial<User>) {
@@ -157,6 +163,23 @@ export class UserEntity {
             this._refreshToken.push(token);
         } else {
             this._refreshToken.push(token);
+        }
+    }
+
+    get tagsUserSee() {
+        return this._tagsUserSee.concat();
+    }
+    set tagsUserSee(tags: string[]) {
+        for (let tag of tags) {
+            this.addTagsUserSee(tag);
+        }
+    }
+    public addTagsUserSee(tag: string) {
+        if (this._tagsUserSee.length >= maxTag) {
+            this._tagsUserSee.shift();
+            this._tagsUserSee.push(tag);
+        } else {
+            this._tagsUserSee.push(tag);
         }
     }
 

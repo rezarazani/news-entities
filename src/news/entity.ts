@@ -187,7 +187,11 @@ export class NewsEntity {
         return this._tag.concat() ;
     }
     set tag(tag: News['tag']) {
-        this._tag = tag;
+        if(typeof tag == 'string'){
+            this._tag = [tag];
+        }else{
+            this._tag = tag;
+        }
     }
 
 

@@ -3,7 +3,7 @@ import {ENTITY} from '../ioc/types';
 import {Id} from '../interfaces/id';
 import { User} from '../user'
 
-const  Situation = <const> ['successful' , 'UserNameNotFound' , 'WrongPassword'] ;
+const  Situation = <const> ['successful' , 'UserNameNotFound' , 'WrongPassword' , 'WrongType'] ;
 
 export type LoginAttempt2 = {
     id : string ,
