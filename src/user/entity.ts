@@ -6,6 +6,12 @@ import { Id } from "../interfaces/id";
 type AccountTypes = 'admin' | 'normal';
 
 const maxTag = 20;
+declare  global {
+    interface Array<T> {
+        inArray: (comparer: any) => boolean;
+        pushIfNotExist: (element: any, comparer: any) => void;
+    }
+}
 
 export type User = {
     id: string,
@@ -175,13 +181,38 @@ export class UserEntity {
         }
     }
     public addTagsUserSee(tag: string) {
+
+        Array.prototype.inArray = function(comparer) { 
+            for(var i=0; i < this.length; i++) { 
+                if(comparer(this[i])) return true; 
+            }
+            return false; 
+        }; 
+        
+        // adds an element to the array if it does not already exist using a comparer 
+        // function
+        Array.prototype.pushIfNotExist = function(element, comparer) { 
+            if (!this.inArray(comparer)) {
+                this.push(element);
+            }
+        }
+
+      
+
         if (this._tagsUserSee.length >= maxTag) {
             this._tagsUserSee.shift();
             this._tagsUserSee.push(tag);
+            this._tagsUserSee.pushIfNotExist(tag, function(e: string) { 
+                return e === tag
+            });
         } else {
-            this._tagsUserSee.push(tag);
+            this._tagsUserSee.pushIfNotExist(tag, function(e: string) { 
+                return e === tag
+            });
         }
     }
+
+    
 
     public async makeRefreshToken(): Promise<string> {
         return this.hash.randomString()
