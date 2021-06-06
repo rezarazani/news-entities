@@ -23,7 +23,8 @@ export type User = {
     name: string,
     isBlock : boolean ;
     refreshToken: string[],
-    tagsUserSee : string[]
+    tagsUserSee : string[],
+    photo : string
 }
 
 @injectable()
@@ -39,6 +40,8 @@ export class UserEntity {
     private _accountType: AccountTypes;
     private _refreshToken: User['refreshToken'];
     private _tagsUserSee: string[];
+    private _photo: string;
+
 
 
     constructor(
@@ -55,6 +58,7 @@ export class UserEntity {
         this._refreshToken = [];
         this._isBlock = false ;
         this._tagsUserSee = [] ;
+        this._photo = '' ;
     }
 
     public set(params: Partial<User>) {
@@ -84,6 +88,9 @@ export class UserEntity {
         }
         if (params.isBlock) {
             this.isBlock = params.isBlock;
+        }
+        if (params.photo) {
+            this.photo = params.photo;
         }
     }
 
@@ -137,6 +144,13 @@ export class UserEntity {
     }
     set salt(salt: string) {
         this._salt = salt;
+    }
+
+    get photo(): string {
+        return this._photo;
+    }
+    set photo(photo: string) {
+        this._photo = photo;
     }
 
     get isBlock(): boolean {
