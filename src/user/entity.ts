@@ -215,7 +215,6 @@ export class UserEntity {
 
         if (this._tagsUserSee.length >= maxTag) {
             this._tagsUserSee.shift();
-            this._tagsUserSee.push(tag);
             this._tagsUserSee.pushIfNotExist(tag, function(e: string) { 
                 return e === tag
             });
